@@ -8,14 +8,34 @@
 import SwiftUI
 
 struct ContentView: View {
+
+  @StateObject private var board = Board(.medium)
+
     var body: some View {
+
+      NavigationStack {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+          Spacer()
+          Grid(horizontalSpacing: 2, verticalSpacing: 2) {
+            ForEach(0..<board.exampleCells.count, id: \.self) { row in
+              GridRow {
+                let userRow = board.userCells[row]
+                ForEach(0..<userRow.count, id: \.self) { column in
+                  let selected = row == board.selectedRow && column == board.selectedColumn
+
+                  CellView(number: userRow[column], isSelected: selected) {
+                    board.selectedRow = row
+                    board.selectedColumn = column
+                  }
+                }
+              }
+            }
+          }
+          .padding(.horizontal)
+          Spacer()
         }
-        .padding()
+        .navigationTitle("Wrong Sudoku!")
+      }
     }
 }
 
