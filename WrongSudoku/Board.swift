@@ -8,7 +8,7 @@
 import Foundation
 
 enum Difficulty: CaseIterable {
-case easy, medium, tricky, taxing, nightmare
+  case easy, medium, tricky, taxing, nightmare
 }
 
 class Board: ObservableObject {
@@ -20,7 +20,7 @@ class Board: ObservableObject {
   @Published var selectedColumn = 0
 
   init(_ difficulty: Difficulty) {
-    create(difficulty)
+      create(difficulty)
   }
 
   func create(_ difficulty: Difficulty) {
@@ -49,11 +49,26 @@ class Board: ObservableObject {
     }
 
     exampleCells = (0..<size).map { _ in
-      (0..<size).map { _ in
-        Int.random(in: 1...maxNumber)
-      }
+        (0..<size).map { _ in
+          Int.random(in: 1...maxNumber)
+        }
     }
 
     userCells = Array(repeating: Array(repeating: 0, count: size), count: size)
+  }
+
+  func enter(_ number: Int) {
+    if userCells[selectedRow][selectedColumn] == number {
+      userCells[selectedRow][selectedColumn] = 0
+    } else {
+      userCells[selectedRow][selectedColumn] = number
+
+      if selectedColumn < exampleCells[0].count - 1 {
+        selectedColumn += 1
+      } else if selectedRow < exampleCells.count - 1 {
+        selectedRow += 1
+        selectedColumn = 0
+      }
+    }
   }
 }

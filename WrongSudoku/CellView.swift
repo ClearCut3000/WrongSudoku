@@ -13,7 +13,7 @@ struct CellView: View {
   let isSelected: Bool
   var onSelected: () -> Void
 
-  var displayedNumber: String {
+  var displayNumber: String {
     if number == 0 {
       return ""
     } else {
@@ -21,24 +21,24 @@ struct CellView: View {
     }
   }
 
-    var body: some View {
-      Button(action: onSelected) {
-        Text(displayedNumber)
-          .font(.largeTitle)
-          .monospacedDigit()
-          .frame(maxWidth: 100, maxHeight: 100)
-          .aspectRatio(contentMode: .fit)
-          .foregroundColor(isSelected ? .white : .primary)
-          .background(isSelected ? .blue : .clear)
-          .border(.primary.opacity(0.3), width: 1)
-          .contentShape(Rectangle())
-      }
-      .buttonStyle(.plain)
+  var body: some View {
+    Button(action: onSelected) {
+      Text(displayNumber)
+        .font(.largeTitle)
+        .monospacedDigit()
+        .frame(maxWidth: 100, maxHeight: 100)
+        .aspectRatio(1, contentMode: .fit)
+        .foregroundColor(isSelected ? .white : .primary)
+        .background(isSelected ? .blue : .clear)
+        .border(.primary.opacity(0.3), width: 1)
+        .contentShape(Rectangle())
     }
+    .buttonStyle(.plain)
+  }
 }
 
 struct CellView_Previews: PreviewProvider {
-    static var previews: some View {
-      CellView(number: 8, isSelected: true) { }
-    }
+  static var previews: some View {
+    CellView(number: 8, isSelected: true) { }
+  }
 }
