@@ -12,6 +12,8 @@ enum Difficulty: CaseIterable {
 }
 
 class Board: ObservableObject {
+
+  //MARK: - Properties
   var exampleCells = [[Int]]()
 
   @Published var userCells = [[Int]]()
@@ -19,10 +21,34 @@ class Board: ObservableObject {
   @Published var selectedRow = 0
   @Published var selectedColumn = 0
 
+  var isSolved: Bool {
+    for i in 0..<exampleCells.count {
+      let exampleSum = exampleCells[i].reduce(0, +)
+      let userSum = userCells[i].reduce(0, +)
+      if exampleSum != userSum { return false }
+    }
+    
+    for i in 0..<exampleCells[0].count {
+      let exampleSum = exampleCells.reduce(0) { $0 + $1[i] }
+      let userSum = userCells.reduce(0) { $0 + $1[i] }
+      if exampleSum != userSum { return false }
+    }
+
+    for row in userCells {
+      for col in row {
+        if col == 0 { return false }
+      }
+    }
+
+    return true
+  }
+
+  //MARK: - Init
   init(_ difficulty: Difficulty) {
       create(difficulty)
   }
 
+  //MARK: - Methods
   func create(_ difficulty: Difficulty) {
     selectedRow = 0
     selectedColumn = 0
@@ -69,6 +95,16 @@ class Board: ObservableObject {
         selectedRow += 1
         selectedColumn = 0
       }
+    }
+  }
+
+  func hint(for number: Int) -> String {
+    let currentValue = userCells[selectedRow][selectedColumn]
+
+    if currentValue == number {
+      return "Clear row \(selectedRow + 1) column \(selectedColumn + 1)"
+    } else {
+      return "Set row \(selectedRow + 1) column \(selectedColumn + 1) to \(number)"
     }
   }
 }
