@@ -34,6 +34,7 @@ struct ContentView: View {
                 }
                 .accessibilityValue(userValue)
                 .accessibilityLabel("Row \(row) column \(column)")
+                .accessibilityAddTraits(selected ? .isSelected : .isButton)
               }
               let exampleSum = sum(forRow: exampleRow)
               let userSum = sum(forRow: userRow)
@@ -99,8 +100,8 @@ struct ContentView: View {
           Text("You solved the board correctly - good job!")
         }
       }
+      .dynamicTypeSize(...DynamicTypeSize.xxxLarge)
     }
-
   }
 
   func sum(forRow row: [Int]) -> Int {
