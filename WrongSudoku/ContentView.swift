@@ -9,14 +9,21 @@ import SwiftUI
 
 struct ContentView: View {
 
+  //MARK: - View Properties
   @StateObject private var board = Board(.medium)
   @State private var isGameOver = false
+  @State private var timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+  @State private var time = 0
 
+  //MARK: - View Body
   var body: some View {
 
     NavigationStack {
       VStack {
-        Spacer()
+        TimerView(font: .system(size: 30),
+                  weight: .black,
+                  value: $time)
+
 
         Grid(horizontalSpacing: 2, verticalSpacing: 2) {
           ForEach(0..<board.exampleCells.count, id: \.self) { row in
@@ -74,6 +81,7 @@ struct ContentView: View {
 
         Button("Submit") {
           isGameOver = true
+          self.timer.upstream.connect().cancel()
         }
         .buttonStyle(.borderedProminent)
         .disabled(board.isSolved == false)
@@ -87,6 +95,8 @@ struct ContentView: View {
         } label: {
           Label("Start a New Game", systemImage: "plus")
         }
+
+
       }
       .alert("Start a new Game", isPresented: $isGameOver) {
         ForEach(Difficulty.allCases, id: \.self) { difficulty in
@@ -100,9 +110,19 @@ struct ContentView: View {
           Text("You solved the board correctly - good job!")
         }
       }
+      .onReceive(timer) { _ in
+        if time == 0 {
+          self.timer.upstream.connect().cancel()
+          isGameOver = true
+        } else {
+          time -= 1
+        }
+      }
       .dynamicTypeSize(...DynamicTypeSize.xxxLarge)
     }
   }
+
+  //MARK: - View Methods
 
   func sum(forRow row: [Int]) -> Int {
     row.reduce(0, +)
@@ -113,6 +133,19 @@ struct ContentView: View {
   }
 
   func startGame(_ diffculty: Difficulty) {
+    timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    switch diffculty {
+    case .easy:
+      time = 60
+    case .medium:
+      time = 120
+    case .tricky:
+      time = 180
+    case .taxing:
+      time = 240
+    case .nightmare:
+      time = 480
+    }
     isGameOver = false
     board.create(diffculty)
   }
