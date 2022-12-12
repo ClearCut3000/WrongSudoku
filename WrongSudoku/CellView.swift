@@ -29,8 +29,8 @@ struct CellView: View {
         .frame(maxWidth: 100, maxHeight: 100)
         .aspectRatio(1, contentMode: .fit)
         .foregroundColor(isSelected ? .white : .primary)
-        .background(isSelected ? .blue : .clear)
-        .border(.primary.opacity(0.3), width: 1)
+        .background(isSelected ? Color("selectedColor") : .clear)
+        .border(.primary.opacity(0.3), width: 3)
         .contentShape(Rectangle())
     }
     .buttonStyle(.plain)

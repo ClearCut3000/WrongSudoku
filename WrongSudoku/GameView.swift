@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  GameView.swift
 //  WrongSudoku
 //
 //  Created by Николай Никитин on 08.12.2022.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct GameView: View {
 
   //MARK: - View Properties
   @StateObject private var board = Board(.medium)
@@ -18,13 +18,23 @@ struct ContentView: View {
   //MARK: - View Body
   var body: some View {
 
-    NavigationStack {
+    ZStack {
+      Color("backgroundColor").ignoresSafeArea()
       VStack {
+        HStack {
+          Button("New Game") {
+            isGameOver = true
+          }
+          .buttonStyle(MainGrowingButton())
+        }
+
+        Spacer()
         TimerView(font: .system(size: 30),
                   weight: .black,
                   value: $time)
+        .foregroundColor(time > 9 ? Color("textColor") : Color("uncorrectSumColor"))
 
-
+        Spacer()
         Grid(horizontalSpacing: 2, verticalSpacing: 2) {
           ForEach(0..<board.exampleCells.count, id: \.self) { row in
             GridRow {
@@ -46,7 +56,7 @@ struct ContentView: View {
               let exampleSum = sum(forRow: exampleRow)
               let userSum = sum(forRow: userRow)
               SumView(number: exampleSum)
-                .foregroundColor(exampleSum == userSum ? .primary : .red)
+                .foregroundColor(exampleSum == userSum ? Color("correctSumColor") : Color("uncorrectSumColor"))
                 .accessibilityLabel("Row \(row + 1) sum: \(exampleSum)")
                 .accessibilityHint(exampleSum == userSum ? "Correct" : "Incorrect")
             }
@@ -56,7 +66,7 @@ struct ContentView: View {
               let exampleSum = sum(forColumn: column, in: board.exampleCells)
               let userSum = sum(forColumn: column, in: board.userCells)
               SumView(number: exampleSum)
-                .foregroundColor(exampleSum == userSum ? .primary : .red)
+                .foregroundColor(exampleSum == userSum ? Color("correctSumColor") : Color("uncorrectSumColor"))
                 .accessibilityLabel("Column \(column + 1) sum: \(exampleSum)")
                 .accessibilityHint(exampleSum == userSum ? "Correct" : "Incorrect")
             }
@@ -68,8 +78,13 @@ struct ContentView: View {
 
         HStack {
           ForEach(1..<10) { i in
-            Button(String(i)) {
+            Button {
               board.enter(i)
+            } label: {
+              Image(systemName: "\(i).circle")
+                .resizable()
+                .scaledToFit()
+                .foregroundColor(Color("textColor"))
             }
             .accessibilityLabel("Enter\(i)")
             .accessibilityHint(board.hint(for: i))
@@ -88,13 +103,8 @@ struct ContentView: View {
 
         Spacer()
       }
-      .navigationTitle("Wrong Sudoku!")
       .toolbar {
-        Button {
-          isGameOver = true
-        } label: {
-          Label("Start a New Game", systemImage: "plus")
-        }
+
 
 
       }
@@ -153,6 +163,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
   static var previews: some View {
-    ContentView()
+    GameView()
   }
 }

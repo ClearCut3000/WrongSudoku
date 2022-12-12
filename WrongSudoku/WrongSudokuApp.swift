@@ -11,7 +11,7 @@ import SwiftUI
 struct WrongSudokuApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+          InitialView()
         }
     }
 }

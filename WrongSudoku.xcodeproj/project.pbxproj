@@ -8,25 +8,29 @@
 
 /* Begin PBXBuildFile section */
 		366E8EB929425DCF0014F123 /* WrongSudokuApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 366E8EB829425DCF0014F123 /* WrongSudokuApp.swift */; };
-		366E8EBB29425DCF0014F123 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 366E8EBA29425DCF0014F123 /* ContentView.swift */; };
+		366E8EBB29425DCF0014F123 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 366E8EBA29425DCF0014F123 /* GameView.swift */; };
 		366E8EBD29425DD30014F123 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 366E8EBC29425DD30014F123 /* Assets.xcassets */; };
 		366E8EC029425DD30014F123 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 366E8EBF29425DD30014F123 /* Preview Assets.xcassets */; };
 		366E8EC729425E350014F123 /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = 366E8EC629425E350014F123 /* Board.swift */; };
 		366E8EC929426FE60014F123 /* CellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 366E8EC829426FE60014F123 /* CellView.swift */; };
 		366E8ECB29437EEC0014F123 /* SumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 366E8ECA29437EEC0014F123 /* SumView.swift */; };
 		366E8ECD2946683F0014F123 /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 366E8ECC2946683F0014F123 /* TimerView.swift */; };
+		366E8ED12947ABD20014F123 /* InitialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 366E8ED02947ABD20014F123 /* InitialView.swift */; };
+		366E8ED32947B8B80014F123 /* MainButtonsStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 366E8ED22947B8B80014F123 /* MainButtonsStyle.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		366E8EB529425DCF0014F123 /* WrongSudoku.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WrongSudoku.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		366E8EB829425DCF0014F123 /* WrongSudokuApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrongSudokuApp.swift; sourceTree = "<group>"; };
-		366E8EBA29425DCF0014F123 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		366E8EBA29425DCF0014F123 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		366E8EBC29425DD30014F123 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		366E8EBF29425DD30014F123 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		366E8EC629425E350014F123 /* Board.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Board.swift; sourceTree = "<group>"; };
 		366E8EC829426FE60014F123 /* CellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellView.swift; sourceTree = "<group>"; };
 		366E8ECA29437EEC0014F123 /* SumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SumView.swift; sourceTree = "<group>"; };
 		366E8ECC2946683F0014F123 /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
+		366E8ED02947ABD20014F123 /* InitialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialView.swift; sourceTree = "<group>"; };
+		366E8ED22947B8B80014F123 /* MainButtonsStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainButtonsStyle.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,13 +64,15 @@
 			isa = PBXGroup;
 			children = (
 				366E8EB829425DCF0014F123 /* WrongSudokuApp.swift */,
-				366E8EBA29425DCF0014F123 /* ContentView.swift */,
+				366E8EBA29425DCF0014F123 /* GameView.swift */,
 				366E8EBC29425DD30014F123 /* Assets.xcassets */,
 				366E8EBE29425DD30014F123 /* Preview Content */,
 				366E8EC629425E350014F123 /* Board.swift */,
 				366E8EC829426FE60014F123 /* CellView.swift */,
 				366E8ECA29437EEC0014F123 /* SumView.swift */,
 				366E8ECC2946683F0014F123 /* TimerView.swift */,
+				366E8ED02947ABD20014F123 /* InitialView.swift */,
+				366E8ED22947B8B80014F123 /* MainButtonsStyle.swift */,
 			);
 			path = WrongSudoku;
 			sourceTree = "<group>";
@@ -150,10 +156,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				366E8ECD2946683F0014F123 /* TimerView.swift in Sources */,
+				366E8ED32947B8B80014F123 /* MainButtonsStyle.swift in Sources */,
 				366E8EC929426FE60014F123 /* CellView.swift in Sources */,
-				366E8EBB29425DCF0014F123 /* ContentView.swift in Sources */,
+				366E8EBB29425DCF0014F123 /* GameView.swift in Sources */,
 				366E8EB929425DCF0014F123 /* WrongSudokuApp.swift in Sources */,
 				366E8EC729425E350014F123 /* Board.swift in Sources */,
+				366E8ED12947ABD20014F123 /* InitialView.swift in Sources */,
 				366E8ECB29437EEC0014F123 /* SumView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
