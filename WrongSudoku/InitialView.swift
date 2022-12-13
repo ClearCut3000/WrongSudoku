@@ -16,6 +16,8 @@ struct InitialView: View {
       ZStack {
         Color("backgroundColor").ignoresSafeArea()
         VStack {
+          Spacer()
+
           Text("Wrong Sudoku!")
             .font(.largeTitle)
             .fontWeight(.light)
@@ -34,11 +36,13 @@ struct InitialView: View {
 
             NavigationLink(destination: GameView(), isActive: $isShowingGameView) { }
 
+            Spacer()
+
             Button("Start") {
               isShowingGameView = true
             }
             .buttonStyle(MainGrowingButton())
-
+          Spacer()
         }
       }
     }

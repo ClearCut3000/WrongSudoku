@@ -14,6 +14,7 @@ struct GameView: View {
   @State private var isGameOver = false
   @State private var timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
   @State private var time = 0
+  @Environment(\.dismiss) private var dismiss
 
   //MARK: - View Body
   var body: some View {
@@ -86,6 +87,7 @@ struct GameView: View {
                 .scaledToFit()
                 .foregroundColor(Color("textColor"))
             }
+            .buttonStyle(KeypadGrowingButton())
             .accessibilityLabel("Enter\(i)")
             .accessibilityHint(board.hint(for: i))
             .frame(maxWidth: .infinity)
@@ -98,15 +100,10 @@ struct GameView: View {
           isGameOver = true
           self.timer.upstream.connect().cancel()
         }
-        .buttonStyle(.borderedProminent)
+        .buttonStyle(MainGrowingButton())
         .disabled(board.isSolved == false)
 
         Spacer()
-      }
-      .toolbar {
-
-
-
       }
       .alert("Start a new Game", isPresented: $isGameOver) {
         ForEach(Difficulty.allCases, id: \.self) { difficulty in
@@ -129,6 +126,15 @@ struct GameView: View {
         }
       }
       .dynamicTypeSize(...DynamicTypeSize.xxxLarge)
+      .navigationBarBackButtonHidden(true)
+      .navigationBarItems(leading:
+                            Button(action: {
+        dismiss()
+      }) {
+        Text("Go Back")
+      }
+        .buttonStyle(MainGrowingButton())
+      )
     }
   }
 

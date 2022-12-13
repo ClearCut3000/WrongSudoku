@@ -17,6 +17,7 @@
 		366E8ECD2946683F0014F123 /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 366E8ECC2946683F0014F123 /* TimerView.swift */; };
 		366E8ED12947ABD20014F123 /* InitialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 366E8ED02947ABD20014F123 /* InitialView.swift */; };
 		366E8ED32947B8B80014F123 /* MainButtonsStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 366E8ED22947B8B80014F123 /* MainButtonsStyle.swift */; };
+		366E8ED52948FCF60014F123 /* KeyPadGrowingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 366E8ED42948FCF60014F123 /* KeyPadGrowingButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,7 @@
 		366E8ECC2946683F0014F123 /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
 		366E8ED02947ABD20014F123 /* InitialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialView.swift; sourceTree = "<group>"; };
 		366E8ED22947B8B80014F123 /* MainButtonsStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainButtonsStyle.swift; sourceTree = "<group>"; };
+		366E8ED42948FCF60014F123 /* KeyPadGrowingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyPadGrowingButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +75,7 @@
 				366E8ECC2946683F0014F123 /* TimerView.swift */,
 				366E8ED02947ABD20014F123 /* InitialView.swift */,
 				366E8ED22947B8B80014F123 /* MainButtonsStyle.swift */,
+				366E8ED42948FCF60014F123 /* KeyPadGrowingButton.swift */,
 			);
 			path = WrongSudoku;
 			sourceTree = "<group>";
@@ -158,6 +161,7 @@
 				366E8ECD2946683F0014F123 /* TimerView.swift in Sources */,
 				366E8ED32947B8B80014F123 /* MainButtonsStyle.swift in Sources */,
 				366E8EC929426FE60014F123 /* CellView.swift in Sources */,
+				366E8ED52948FCF60014F123 /* KeyPadGrowingButton.swift in Sources */,
 				366E8EBB29425DCF0014F123 /* GameView.swift in Sources */,
 				366E8EB929425DCF0014F123 /* WrongSudokuApp.swift in Sources */,
 				366E8EC729425E350014F123 /* Board.swift in Sources */,
