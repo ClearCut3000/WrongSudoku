@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CoreHaptics
 
 struct GameView: View {
 
@@ -15,6 +16,7 @@ struct GameView: View {
   @State private var timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
   @State private var time = 0
   @Environment(\.dismiss) private var dismiss
+  @State private var engine: CHHapticEngine?
 
   //MARK: - View Body
   var body: some View {
@@ -81,11 +83,11 @@ struct GameView: View {
           ForEach(1..<10) { i in
             Button {
               board.enter(i)
+              sharpTap()
             } label: {
               Image(systemName: "\(i).circle")
                 .resizable()
                 .scaledToFit()
-                .foregroundColor(Color("textColor"))
             }
             .buttonStyle(KeypadGrowingButton())
             .accessibilityLabel("Enter\(i)")
@@ -97,6 +99,7 @@ struct GameView: View {
         .padding()
 
         Button("Submit") {
+          complexSuccess()
           isGameOver = true
           self.timer.upstream.connect().cancel()
         }
@@ -125,6 +128,7 @@ struct GameView: View {
           time -= 1
         }
       }
+      .onAppear(perform: prepareHaptics)
       .dynamicTypeSize(...DynamicTypeSize.xxxLarge)
       .navigationBarBackButtonHidden(true)
       .navigationBarItems(leading:
@@ -164,6 +168,62 @@ struct GameView: View {
     }
     isGameOver = false
     board.create(diffculty)
+  }
+
+  func prepareHaptics() {
+      guard CHHapticEngine.capabilitiesForHardware().supportsHaptics else { return }
+
+      do {
+          engine = try CHHapticEngine()
+          try engine?.start()
+      } catch {
+          print("There was an error creating the engine: \(error.localizedDescription)")
+      }
+  }
+
+  func sharpTap() {
+    guard CHHapticEngine.capabilitiesForHardware().supportsHaptics else { return }
+    var events = [CHHapticEvent]()
+
+    let intensity = CHHapticEventParameter(parameterID: .hapticIntensity, value: 1)
+    let sharpness = CHHapticEventParameter(parameterID: .hapticSharpness, value: 1)
+    let event = CHHapticEvent(eventType: .hapticTransient, parameters: [intensity, sharpness], relativeTime: 0)
+    events.append(event)
+
+    do {
+        let pattern = try CHHapticPattern(events: events, parameters: [])
+        let player = try engine?.makePlayer(with: pattern)
+        try player?.start(atTime: 0)
+    } catch {
+        print("Failed to play pattern: \(error.localizedDescription).")
+    }
+  }
+
+  func complexSuccess() {
+      guard CHHapticEngine.capabilitiesForHardware().supportsHaptics else { return }
+      var events = [CHHapticEvent]()
+
+    for i in stride(from: 0, to: 1, by: 0.1) {
+        let intensity = CHHapticEventParameter(parameterID: .hapticIntensity, value: Float(i))
+        let sharpness = CHHapticEventParameter(parameterID: .hapticSharpness, value: Float(i))
+        let event = CHHapticEvent(eventType: .hapticTransient, parameters: [intensity, sharpness], relativeTime: i)
+        events.append(event)
+    }
+
+    for i in stride(from: 0, to: 1, by: 0.1) {
+        let intensity = CHHapticEventParameter(parameterID: .hapticIntensity, value: Float(1 - i))
+        let sharpness = CHHapticEventParameter(parameterID: .hapticSharpness, value: Float(1 - i))
+        let event = CHHapticEvent(eventType: .hapticTransient, parameters: [intensity, sharpness], relativeTime: 1 + i)
+        events.append(event)
+    }
+
+      do {
+          let pattern = try CHHapticPattern(events: events, parameters: [])
+          let player = try engine?.makePlayer(with: pattern)
+          try player?.start(atTime: 0)
+      } catch {
+          print("Failed to play pattern: \(error.localizedDescription).")
+      }
   }
 }
 

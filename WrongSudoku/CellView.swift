@@ -28,7 +28,7 @@ struct CellView: View {
         .monospacedDigit()
         .frame(maxWidth: 100, maxHeight: 100)
         .aspectRatio(1, contentMode: .fit)
-        .foregroundColor(isSelected ? .white : .primary)
+        .foregroundColor(isSelected ? .white : .gray)
         .background(isSelected ? Color("selectedColor") : .clear)
         .border(.primary.opacity(0.3), width: 3)
         .contentShape(Rectangle())
@@ -39,6 +39,6 @@ struct CellView: View {
 
 struct CellView_Previews: PreviewProvider {
   static var previews: some View {
-    CellView(number: 8, isSelected: true) { }
+    CellView(number: 8, isSelected: false) { }
   }
 }
