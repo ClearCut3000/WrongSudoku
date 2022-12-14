@@ -13,7 +13,7 @@ struct MainGrowingButton: ButtonStyle {
 
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .padding(8)
+            .padding(10)
             .background(!isEnabled ? Color("uncorrectSumColor").opacity(0.3) : (configuration.isPressed ? Color.orange : Color("uncorrectSumColor")) )
             .foregroundColor(.white)
             .clipShape(Capsule())

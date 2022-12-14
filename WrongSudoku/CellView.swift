@@ -28,9 +28,9 @@ struct CellView: View {
         .monospacedDigit()
         .frame(maxWidth: 100, maxHeight: 100)
         .aspectRatio(1, contentMode: .fit)
-        .foregroundColor(isSelected ? .white : .gray)
+        .foregroundColor(isSelected ? .white : .black.opacity(0.5))
         .background(isSelected ? Color("selectedColor") : .clear)
-        .border(.primary.opacity(0.3), width: 3)
+        .border(.black.opacity(0.5), width: 5)
         .contentShape(Rectangle())
     }
     .buttonStyle(.plain)
